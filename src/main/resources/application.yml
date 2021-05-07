@@ -1,0 +1,46 @@
+
+server:
+  port: 8000
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+    
+spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+      
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/sns
+    username: postgres
+    password: 12345
+    
+
+  
+  jpa:
+    properties:
+     hibernate:
+      format-sql: true
+
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      use-new-id-generator-mappings: false
+    show-sql: true
+    
+
+    
+
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
