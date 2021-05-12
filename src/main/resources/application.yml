@@ -22,9 +22,9 @@ spring:
     url: jdbc:postgresql://localhost:5432/sns
     username: postgres
     password: 12345
-    
 
-  
+
+
   jpa:
     properties:
      hibernate:

@@ -1,19 +1,25 @@
 package com.woong.blog.service;
 
 import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.woong.blog.model.Board;
+import com.woong.blog.model.Reply;
 import com.woong.blog.model.Users;
 import com.woong.blog.repository.BoardRepository;
+import com.woong.blog.repository.ReplyRepository;
 
 @Service
 public class BoardService {
 	
 	@Autowired
 	private BoardRepository boardRepository;
+	
+	@Autowired
+	private ReplyRepository replyRepository;
 	
 	
 	@Transactional
@@ -50,6 +56,20 @@ public class BoardService {
 					});
 		 board.setTitle(requestBoard.getTitle()); 
 		 board.setContent(requestBoard.getContent());
+	}
+	
+	@Transactional
+	public void replyWrite(Users users, int boardId, Reply requestReply) {
+		Board board = boardRepository.findById(boardId)
+				.orElseThrow(()->{
+			return new IllegalArgumentException("댓글 작성 실패 : 게시글 id를 찾을 수 없습니다.");
+		});
+		
+		requestReply.setUsers(users);
+		requestReply.setBoard(board);
+		
+		replyRepository.save(requestReply);
+		
 	}
 	
 }

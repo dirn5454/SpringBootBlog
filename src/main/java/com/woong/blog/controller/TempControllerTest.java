@@ -44,6 +44,7 @@ public class TempControllerTest {
 	@GetMapping("/board/{id}") 
 	public String findByld(@PathVariable int id, Model model) {
 		model.addAttribute("board",boardService.boardDetail(id));
+		
 		return "detailForm";
 	}
 	

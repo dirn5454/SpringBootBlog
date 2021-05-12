@@ -12,16 +12,48 @@
 		<div>${board.content}</div>
 	</div>
 	<hr />
+
 	<button class="btn btn-secondary" onclick="history.back()">돌아가기</button>
 	<c:if test="${board.users.id == principal.users.id}">
 		<a href="/board/${board.id}/updateForm" class="btn btn-primary">수정</a>
-	    <button class="btn btn-primary" id="btn-delete">삭제</button>
+		<button class="btn btn-primary" id="btn-delete">삭제</button>
 	</c:if>
 	<br /> <br />
 	<div>
-		글번호: <span id="id"><i>${board.id}</i></span> 
-		작성자: <span><i>${board.users.username}</i></span>
+		글번호: <span id="id"><i>${board.id}</i></span> 작성자: <span><i>${board.users.username}</i></span>
 	</div>
+	<br /> <br />
+	<div class="card">
+		<div class="card-header">댓글리스트</div>
+		<div id="reply--box" class="list-grop">
+			<c:forEach var="reply" items="${board.replys}">   <%-- ${board.replys}로 댓글이 모두 담긴다. --%>
+				<div id="reply--1" class="list-group-item d-flex justify-content-between">
+					<div class="d-flex">
+						<div class="font-weight-bold">${reply.users.username} &nbsp;</div>
+						<div>${reply.content}</div>
+					</div>
+					<div class="d-flex">
+						<button class="badge">삭제</button>
+					</div>
+				</div>
+			</c:forEach>
+
+
+		</div>
+	</div>
+	<br />
+	<div class="card">
+	<form>
+		<input type="hidden" id="boardId" value="${board.id}"/>
+			<div class="card-body">
+				<textarea id ="reply-content" class="form-control" rows="1"></textarea>
+			</div>
+			<div class="card-footer">
+				<button type="button" id ="btn-reply-save" class="btn btn-binary">댓글달기</button>
+			</div>
+		</form>
+	</div>
+
 </div>
 
 
