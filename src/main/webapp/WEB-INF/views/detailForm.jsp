@@ -25,31 +25,32 @@
 	<br /> <br />
 	<div class="card">
 		<div class="card-header">댓글리스트</div>
-		<div id="reply--box" class="list-grop">
-			<c:forEach var="reply" items="${board.replys}">   <%-- ${board.replys}로 댓글이 모두 담긴다. --%>
-				<div id="reply--1" class="list-group-item d-flex justify-content-between">
+		<div id="reply-box" class="list-grop">
+			<c:forEach var="reply" items="${board.replys}">	<%-- ${board.replys}로 댓글이 모두 담긴다. --%>
+				<div id="reply-${reply.id}" class="list-group-item d-flex justify-content-between">
 					<div class="d-flex">
-						<div class="font-weight-bold">${reply.users.username} &nbsp;</div>
+						<div class="font-weight-bold">${reply.users.username}&nbsp;</div>
 						<div>${reply.content}</div>
 					</div>
 					<div class="d-flex">
-						<button class="badge">삭제</button>
+						<c:if test="${reply.users.id == principal.users.id}">
+							<button type="button" onClick="index.replyUpdate(${reply.id}, ${reply.content})" class="badge">수정</button>
+							<button type="button" onClick="index.replyDelete(${reply.id})" class="badge">삭제</button>
+						</c:if>
 					</div>
 				</div>
 			</c:forEach>
-
-
 		</div>
 	</div>
 	<br />
 	<div class="card">
-	<form>
-		<input type="hidden" id="boardId" value="${board.id}"/>
+		<form>
+			<input type="hidden" id="boardId" value="${board.id}" />
 			<div class="card-body">
-				<textarea id ="reply-content" class="form-control" rows="1"></textarea>
+				<textarea id="reply-content" class="form-control" rows="1"></textarea>
 			</div>
 			<div class="card-footer">
-				<button type="button" id ="btn-reply-save" class="btn btn-binary">댓글달기</button>
+				<button type="button" id="btn-reply-save" class="btn btn-binary">댓글달기</button>
 			</div>
 		</form>
 	</div>

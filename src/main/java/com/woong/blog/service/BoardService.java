@@ -51,12 +51,16 @@ public class BoardService {
 	public void updateBoard(int id, Board requestBoard) {
 		System.out.println("글 수정하기: "+id);
 		 Board board = boardRepository.findById(id)
+				 
+				
 				 .orElseThrow(()->{
 						return new IllegalArgumentException("글 찾기 실패");
 					});
 		 board.setTitle(requestBoard.getTitle()); 
 		 board.setContent(requestBoard.getContent());
 	}
+	
+	
 	
 	@Transactional
 	public void replyWrite(Users users, int boardId, Reply requestReply) {
@@ -71,5 +75,8 @@ public class BoardService {
 		replyRepository.save(requestReply);
 		
 	}
-	
+	@Transactional
+	public void replyDelete(int replyId){
+		replyRepository.deleteById(replyId);
+	}
 }

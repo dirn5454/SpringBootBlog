@@ -23,9 +23,9 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-		<a class="navbar-brand" href="/">LJW
-		<%-- <img src="images/instagram.png" style="width:30px;">  이미지 표시 ㅌ --%>
+	<nav class="navbar bg-light navbar-light">
+		<a class="navbar-brand" href="/" style="text-align:center">LJW
+		<%-- <img src="instagram.png" style="width:30px;">  이미지 표시 ㅌ --%>
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
