@@ -8,30 +8,33 @@
 
 	<c:forEach var="board" items="${boards.content}">
 
-		<div class="card m-8">
-			<div class="card-body">
-				<h4 class="card-title">${board.content}</h4>
-				<a class="btn btn-primary" href="/board/${board.id}">상세보기</a>
-				<div class="d-flex">
+		
+
+				<div class="card">
+
 					<div class="d-flex">
-						<div class="font-weight-bold">${board.users.username}&nbsp;</div>
-						<div>${board.title}</div>
+						<h4 class="card-title">${board.users.username} </h4>
+						<a class="btn btn-default" style="width: 1050px" href="/board/${board.id}"></a>
 					</div>
-				</div>
-				<c:forEach var="reply" items="${board.replys}">
-					<div id="reply--1" class="list-group-item d-flex justify-content-between">
+					<h4 class="card-text">${board.content}</h4>
+					<div class="d-flex">
 						<div class="d-flex">
-							<div class="font-weight-bold">${reply.users.username}&nbsp;</div>
-							<div>${reply.content}</div>
+							<div class="font-weight-bold">${board.users.username}&nbsp;</div>
+							<div>${board.title}</div>
 						</div>
 					</div>
-				</c:forEach>
+					<c:forEach var="reply" items="${board.replys}">
+						<div id="reply--1" class="list-group-item d-flex justify-content-between">
+							<div class="d-flex">
+								<div class="font-weight-bold">${reply.users.username}&nbsp;</div>
+								<div>${reply.content}</div>
+							</div>
+						</div>
 
-			</div>
-		</div>
+					</c:forEach>
+				</div>
+		
 	</c:forEach>
-
-
 </div>
 
 <%@ include file="layout/footer.jsp"%>

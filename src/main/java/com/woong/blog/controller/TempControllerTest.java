@@ -15,9 +15,9 @@ import org.springframework.data.domain.Sort;
 @Controller
 public class TempControllerTest {
 
+	
 	@Autowired
 	private BoardService boardService;
-	
 	
 	@GetMapping({"","/"})
 	public String index(Model model, @PageableDefault(sort="id", direction= Sort.Direction.DESC)Pageable pageable) {
