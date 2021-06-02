@@ -25,19 +25,13 @@ public class BoardApiController {
 	@Autowired
 	private BoardService boardService; 
 		
-	@PutMapping("/board/{id}")
-	public ResponseDto<Integer> update(@PathVariable int id, @RequestBody Board board){
-		boardService.updateBoard(id, board);
-		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 	
-	}
-	
+
 	@PostMapping("/board")
 	public ResponseDto<Integer> save(@RequestBody Board board, @AuthenticationPrincipal PrincipalDetail principal) { 		
 		
 		boardService.write(board, principal.getUsers());
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 
 	}
-	
 	
 	@DeleteMapping("/board/{id}")
 	public ResponseDto<Integer> boardDeleteById(@PathVariable int id){
@@ -46,8 +40,15 @@ public class BoardApiController {
 		
 	}
 
+	@PutMapping("/board/{id}")
+	public ResponseDto<Integer> update(@PathVariable int id, @RequestBody Board board){
+		boardService.updateBoard(id, board);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 	
+	}
+	
+	
 	@PostMapping("/board/{boardId}/reply")
-	public ResponseDto<Integer> replySave(@PathVariable int boardId, @RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetail principal) { 		
+	public ResponseDto<Integer> saveReply(@PathVariable int boardId, @RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetail principal) { 		
 		boardService.replyWrite(principal.getUsers(), boardId, reply);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 
 	}
@@ -58,6 +59,36 @@ public class BoardApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 
 	}
 	
+	// 없어도 되는 것
+	@PutMapping(value = "/board/{boardId}/commandUpdateForm/{replyId}")
+	public ResponseDto<Integer> replyWindowById(@PathVariable int replyId) { 		
+		boardService.replyWindow(replyId);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 
+	}
+	
+	/*
+	 sdsssssssssssssssssssss
+	 ssss
+	  
+	@PostMapping("/board/{boardId}/commandUpdateForm")
+	public ResponseDto<Integer> replySaveWindow(@PathVariable int boardId, @RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetail principal) { 		
+		boardService.replyWriteWindow(principal.getUsers(), boardId, reply);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 
+	}
+	*/
+/*
+	@PostMapping("/board/{boardId}/commandUpdateForm")
+	public ResponseDto<Integer> windowReply(@PathVariable int boardId, @RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetail principal) { 		
+		boardService.replyWindow(principal.getUsers(), boardId, reply);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 
+	}
+	@PostMapping("/board/{boardId}/commandUpdateForm")
+	public ResponseDto<Integer> windowReply(@PathVariable int boardId, @RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetail principal) { 		
+		boardService.replyWindow(principal.getUsers(), boardId, reply);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 
+	}
+	
+
 	/*
 	@PutMapping("/board/{boardId}/reply/{replyId}")
 	public ResponseDto<Integer> replyUpdate(@PathVariable int id, @RequestBody Board board){
@@ -65,6 +96,8 @@ public class BoardApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 	
 	}
 	*/
+	
+	
 
 	
 }

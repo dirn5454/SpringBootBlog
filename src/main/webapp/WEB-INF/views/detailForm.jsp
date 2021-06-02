@@ -3,7 +3,17 @@
 
 <%@ include file="layout/header.jsp"%>
 
+
+
+<script>
+
+
+
+</script>
+
 <div class="container">
+
+
 	<div>
 		<h3>${board.title}</h3>
 	</div>
@@ -30,13 +40,15 @@
 				<div id="reply-${reply.id}" class="list-group-item d-flex justify-content-between">
 					<div class="d-flex">
 						<div class="font-weight-bold">${reply.users.username}&nbsp;</div>
-						<div>${reply.content}</div>
+						<div id="replySingleId">${reply.id}</div>
+						<div id="replySingleContent">${reply.content}</div>
 					</div>
 					<div class="d-flex">
 						<c:if test="${reply.users.id == principal.users.id}">
-							<button type="button" onClick="index.replyUpdate(${reply.id}, ${reply.content})" class="badge">수정</button>
+							<button type="button" onClick="index.replyWindow(${reply.id})" class="badge">수정</button>
 							<button type="button" onClick="index.replyDelete(${reply.id})" class="badge">삭제</button>
 						</c:if>
+						
 					</div>
 				</div>
 			</c:forEach>
@@ -51,6 +63,10 @@
 			</div>
 			<div class="card-footer">
 				<button type="button" id="btn-reply-save" class="btn btn-binary">댓글달기</button>
+			</div>
+			<div class="card-body">
+				<textarea id="reply-updateContent" class="form-control" rows="1"></textarea>
+				<button type="button" id="btn-reply-updateSave" class="btn btn-binary">완료</button>
 			</div>
 		</form>
 	</div>

@@ -16,6 +16,7 @@ let index = {
 			this.replyUpdate();
 		});
 
+
 	},
 
 
@@ -26,7 +27,7 @@ let index = {
 			content: $("#content").val(),
 			users: $("#users").val()
 		});
-
+// #뒤는 버튼으로 넘어갈 text나 input의 id값이다.
 
 		$.ajax({
 			type: "POST",
@@ -43,17 +44,11 @@ let index = {
 
 	},
 	boardUpdate: function(id) {
-		
-		
-		let boardId = $("#boardId").text();
-		
+
 		let data = {
 			title: $("#title").val(),
 			content: $("#content").val()
 		};
-		console.log(boardId);
-		console.log(id);
-		console.log(data);
 
 		$.ajax({
 			type: "PUT",
@@ -130,12 +125,36 @@ let index = {
 		}).fail(function(error) {
 			alert(JSON.stringify(error));
 		});
+	},
+
+	replyWindow: function(replyId) {
+
+		let boardId = $("#boardId").val();
+        let replySingleId = $("#replySingleId").val();
+        
+        alert(replySingleId);
+        
+		window.open("/board/" + boardId + "/commandUpdateForm/" + replyId, "replyUpdateForm", "width=570, height=350, resizable=no, scrollbars=no");
+
+		$.ajax({
+			type: 'POST',
+			url: "/board/" + boardId + "/reply/" + replyId,
+			data: JSON.stringify(replyId), // 수정된 부분 -> 오류발생
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+		}).done(function(resp) {
+		}).fail(function(error) {
+			alert(JSON.stringify(error));
+		});
+
+
 	}
+
 	/*
 	replyUpdate: function(replyID, replyContentt) {
 		
 
-        let boardId = $("#boardId").val();
+		let boardId = $("#boardId").val();
 
 		let data = JSON.stringify({
 			title: $("#title").val(),
@@ -144,7 +163,7 @@ let index = {
 
 		$.ajax({
 			type: "PUT",
-		    url: "/board/" + boardId + "/reply/" + replyId,
+			url: "/board/" + boardId + "/reply/" + replyId,
 			data: data,
 			contentType: "application/json; charset=utf-8",
 			dataType: "json"
@@ -157,22 +176,6 @@ let index = {
 	}
 	*/
 
-	/*
- 
-	 replyDelete: function(boardId, replyId) {
-	 	
-		 $.ajax({
-			 type: "DELETE",
-			 url: "/board/" + boardId + "/reply/" + replyId,
-			 dataType: "json"
-		 }).done(function(resp) {
-			 alert("댓글삭제가 완료되었습니다.");
-			 location.href = "/board/" + boardId;
-		 }).fail(function(error) {
-			 alert(JSON.stringify(error));
-		 });
-	 }
- 	
-	 */
+
 }
 index.init();

@@ -1,5 +1,9 @@
 package com.woong.blog.controller;
 
+
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Pageable;
@@ -15,6 +19,7 @@ import org.springframework.data.domain.Sort;
 @Controller
 public class TempControllerTest {
 
+	
 	
 	@Autowired
 	private BoardService boardService;
@@ -48,14 +53,33 @@ public class TempControllerTest {
 		return "detailForm";
 	}
 	
-	
+	// 해당하는 url주소에 사용할 jsp파일을 리턴하여 뜨게한다.
 	@GetMapping("/board/{id}/updateForm") 
 	public String updateForm(@PathVariable int id, Model model) {
 		model.addAttribute("board",boardService.boardDetail(id));
 		return "updateForm";
 	}
 
-	
-	
+	// -> 여기에서 reply의 content나, id값을 넘겨줘야함
+	@GetMapping("/board/{id}/commandUpdateForm/{replyId}") 
+	public String replyWindow(@PathVariable int id, Model model) {
+		model.addAttribute("board",boardService.boardDetail(id));
+		return "commandUpdateForm";
+	}
+	// 수정된 부분
+	/*
+	@GetMapping("/board/{id}/commandUpdateForm") 
+	public @ResponseBody String replyIdWindow(@PathVariable int id) {
+		
+		return "commandUpdateForm";
+	}
+	*/
+	/*
+	@GetMapping("/board/{id}/commandUpdateForm") 
+	public String replyWindow(@PathVariable int id, Model model) {
+		model.addAttribute("reply",boardService.Detail(id));
+		return "commandUpdateForm";
+	}
+	*/
 	
 }
